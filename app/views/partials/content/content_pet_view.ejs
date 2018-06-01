@@ -1,7 +1,7 @@
 <div class="row">
     <% if (pet) { %>
     <div class="col-sm-6">
-        <img src="/images/<%=pet.picPrefix%>_<%=pet.type%>.jpg" class="img-circle img-responsive" alt="<%=pet.name%>"/>
+        <img src="/images/<%=pet.picPrefix%>_<%=pet.type.toLowerCase()%>.jpg" class="img-circle img-responsive" alt="<%=pet.name%>"/>
     </div>
 
     <div class="col-sm-6 text-center">
