@@ -28,6 +28,41 @@
           <% }); %>
           <% } %>
           </tbody>
-        </table>
-      </div>
+      </table>
+    </div>
+
+    <!-- Add Google Maps -->
+    <div class="container">
+        <div id="googleMap" style="height:800px;width:100%;"></div>
+    </div>
+
+    <script>
+    function myMap() {
+        var myCenter = new google.maps.LatLng(50.451128, -104.611999);
+        var mapProp = {center:myCenter, zoom:4, scrollwheel:false, draggable:true, mapTypeId:google.maps.MapTypeId.ROADMAP};
+        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+        var marker = new google.maps.Marker({position:myCenter});
+        marker.setMap(map);
+
+        setPetMarkers(map);
+    }
+    function setPetMarkers(map) {
+        <% if (pets) { %>
+            <% pets.forEach(function(pet) { %>
+                var marker<%=pet.pet_id%> = new google.maps.Marker({
+                    position: new google.maps.LatLng(<%=pet.latitude%>, <%=pet.longitude%>),
+                    map: map,
+                    title: '<%=pet.name%>, <%=pet.type%>, <%=pet.breed%>'
+                });
+
+                  marker<%=pet.pet_id%>.addListener('click', function() {
+                      window.location='/pets/' + <%=pet.pet_id%>; 
+                  });
+        <%    })
+           }
+        %>
+    }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%=googleMapApiKey%>&callback=myMap"></script>
+
 </div>

@@ -44,7 +44,8 @@ router.get('/', function(req, res) {
         res.render('pet_list', {
             pageTitle: 'Home',
             pets: pets,
-            pageID: 'pet_list'
+            pageID: 'pet_list',
+            googleMapApiKey: process.env.GOOGLE_API_KEY
         });
     };
 

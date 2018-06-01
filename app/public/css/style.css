@@ -98,3 +98,9 @@ header .navbar-inverse .navbar-nav>li>a {
   font-weight: bold;
   font-style: italic;
 }
+
+footer {
+  font-size: 15px;
+  margin: 40px 0px 30px 0px;
+  color: #000000;
+}
