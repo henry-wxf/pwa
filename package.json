@@ -4,7 +4,7 @@
   "description": "Pet Weather App - a showcase of a web application based on Node.js",
   "main": "app/app.js",
   "scripts": {
-    "dev": "nodemon -e css,ejs,js,json --watch app",
+    "dev": "NODE_ENV=dev nodemon -e css,ejs,js,json --watch app",
     "start": "node app/app.js"
   },
   "author": "Henry Wang",

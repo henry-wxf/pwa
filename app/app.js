@@ -1,5 +1,4 @@
 const express = require('express');
-const reload = require('reload');
 const dotenv = require('dotenv');
 const app = express();
 
@@ -23,4 +22,8 @@ const server = app.listen(PORT, function() {
   console.log(`Listening on port ${PORT}`);
 });
 
-reload(server, app);
+if (process.env.NODE_ENV === 'dev') {
+    const reload = require('reload');
+    reload(server, app);
+}
+
