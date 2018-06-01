@@ -56,7 +56,14 @@ const processShelterAPIRes = function(apiRes) {
       });
 }
 
+const GEO_CACHE = {};
 const getGeoInfo = function(next) {
+    const cachedLocation = GEO_CACHE[`${myPet.latitude},${myPet.longitude}`];
+    if (cachedLocation) {
+        console.log(`retrieve location from cache: ${cachedLocation}`);
+        return next({cachedLocation: cachedLocation});
+    }
+
     const googleGeocodeAPI = `${googleGeoUrl}=${myPet.latitude},${myPet.longitude}&key=${process.env.GOOGLE_API_KEY}`;
     https.get(googleGeocodeAPI, function(geocodeRes) {
         console.log('geocode statusCode:', geocodeRes.statusCode);
@@ -81,23 +88,30 @@ const getGeoInfo = function(next) {
 }
 
 const populateGeo = function(geoInfo) {
-      console.log(`populateGeo geoInfo: %j`, geoInfo);
+    if (geoInfo.cachedLocation) {
+        myPet.location = geoInfo.cachedLocation;
+    } else {
+        console.log(`populateGeo geoInfo: %j`, geoInfo);
 
-      let city = '';
-      let area = '';
+        let city = '';
+        let area = '';
 
-      let arr_address_comp = geoInfo.results[0].address_components;
+        const arr_address_comp = geoInfo.results[0].address_components;
 
-      arr_address_comp.forEach(function(val) {
-          if(val.types[0] === "locality" ){
-            city = val.long_name;
-          }
-          if(val.types[0] === "administrative_area_level_1" ){
-              area = val.short_name;
-          }
-      });
+        arr_address_comp.forEach(function(val) {
+            if(val.types[0] === "locality" ){
+              city = val.long_name;
+            }
+            if(val.types[0] === "administrative_area_level_1" ){
+                area = val.short_name;
+            }
+        });
 
-      myPet.location = `${city}, ${area}`;
+        const theLocation = `${city}, ${area}`;
+        GEO_CACHE[`${myPet.latitude},${myPet.longitude}`] = theLocation;
+
+        myPet.location = theLocation;
+    }
 
       console.log('going to fetch weather info ...');
       getWeatherInfo(populateWeatherInfo);
