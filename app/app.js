@@ -1,6 +1,11 @@
 const express = require('express');
 const reload = require('reload');
+const dotenv = require('dotenv');
 const app = express();
+
+//load local environment variables from .env which can be accessed by using process.env.blabla
+https://medium.com/@rafaelvidaurre/managing-environment-variables-in-node-js-2cb45a55195f
+dotenv.load();
 
 const PORT = process.env.PORT || 3000;
 

@@ -15,18 +15,18 @@
             </tr>
           </thead>
           <tbody>
+          <% if (pets) { %>
+          <% pets.forEach(function(pet) { %>
+
             <tr>
-              <td>Alajax</td>
-              <td>Dog</td>
-              <td>Beagle</td>
-              <td><a href="/pets/1">view</></td>
+              <td><%=pet.name%></td>
+              <td><%=pet.type%></td>
+              <td><%=pet.breed%></td>
+              <td><a href="/pets/<%=pet.pet_id%>">view</></td>
             </tr>
-            <tr>
-              <td>Alajax</td>
-              <td>Dog</td>
-              <td>Beagle</td>
-              <td><a href="/pets/2">view</></td>
-            </tr>
+
+          <% }); %>
+          <% } %>
           </tbody>
         </table>
       </div>

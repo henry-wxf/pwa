@@ -49,7 +49,6 @@ header .navbar-default {
   border: 0;
 }
 
-
 header .navbar-brand {
   font-family: 'Roboto', sans-serif;
   font-size: 1.3em;
@@ -77,4 +76,25 @@ header .navbar-inverse .navbar-nav>li>a {
 
 .page-header {
   border-bottom: 0px;
+}
+
+.info_msg {
+  color: #0000FF;
+}
+
+.error_msg {
+  color: #FF0000;
+}
+
+.need_shelter_false>h1 {
+  color: #0000FF;
+}
+
+.need_shelter_true {
+}
+
+.pet_name, .pet_location{
+  color: #C4663F;
+  font-weight: bold;
+  font-style: italic;
 }
