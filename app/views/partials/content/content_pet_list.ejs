@@ -52,7 +52,8 @@
                 var marker<%=pet.pet_id%> = new google.maps.Marker({
                     position: new google.maps.LatLng(<%=pet.latitude%>, <%=pet.longitude%>),
                     map: map,
-                    title: '<%=pet.name%>, <%=pet.type%>, <%=pet.breed%>'
+                    title: '<%=pet.name%>, <%=pet.type%>, <%=pet.breed%>',
+                    icon: '/images/pet_marker.png'
                 });
 
                   marker<%=pet.pet_id%>.addListener('click', function() {
